@@ -1,0 +1,34 @@
+on:
+  push:
+    branches: 
+      - ipq6000
+
+jobs:
+  build:
+    runs-on: ubuntu-18
+    steps:
+      - name: init
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh git git-doc subversion build-essential flex wget gawk unzip man file python2.7 zlib1g-dev libssl-dev libncurses5-dev ocaml-nox
+          sudo ln -s /usr/bin/python2.7 /usr/bin/python
+      - name: build
+        run: |
+          git clone --depth 1 --branch qsdk-11.3-ipq60xx-4.4 https://github.com/8devices/openwrt-8devices.git qsdk
+          cd qsdk
+          wget -P tools/mkimage/patches https://raw.githubusercontent.com/felix-fly/router-map/main/qsdk-patches/210-openssl-1.1.x-compat.patch
+          sed -i 's/$RUN "make -j4"/#$RUN "make -j4"/g' quick_start.sh
+          ./quick_start.sh 8dev_mango_open -c
+          wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.config -O .config
+          make defconfig
+          make download -j8
+          find dl -size -1024c -exec rm -f {} \;
+          make -j$(nproc) || make -j1 V=s
+          cd ..
+          mkdir bin
+          mv qsdk/bin/targets bin
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: bin
