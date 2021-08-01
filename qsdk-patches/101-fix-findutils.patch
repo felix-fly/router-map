@@ -1,0 +1,46 @@
+--- a/gnulib/lib/freadahead.c   2021-02-08 09:11:12.009710455 +0800                                                                                           
++++ b/gnulib/lib/freadahead.c   2021-02-08 09:06:20.140641585 +0800                                                                                           
+@@ -61,6 +61,7 @@                                                                                                                                             
+   /* fp->_Buf <= fp->_Next <= fp->_Rend */                                                                                                                   
+   return fp->_Rend - fp->_Next;                                                                                                                              
+ #else
+- #error "Please port gnulib freadahead.c to your platform! Look at the definition of fflush, fread on your system, then report this to bug-gnulib."
++ //#error "Please port gnulib freadahead.c to your platform! Look at the definition of fflush, fread on your system, then report this to bug-gnulib."
++ return 0;
+ #endif
+ }
+--- a/gnulib/lib/freading.c     2021-02-08 09:11:12.009710455 +0800
++++ b/gnulib/lib/freading.c     2021-02-08 09:06:20.140641585 +0800
+@@ -43,7 +43,8 @@
+   return ((fp->_Mode & 0x2 /* _MOPENW */) == 0
+          || (fp->_Mode & 0x1000 /* _MREAD */) != 0);
+ #else
+- #error "Please port gnulib freading.c to your platform!"
++ //#error "Please port gnulib freading.c to your platform!"
++ return 0;
+ #endif
+ }
+  
+--- a/gnulib/lib/fpurge.c       2021-02-08 09:11:12.009710455 +0800
++++ b/gnulib/lib/fpurge.c       2021-02-08 09:06:20.140641585 +0800
+@@ -114,7 +114,8 @@
+     fp->_Rend = fp->_Next;
+   return 0;
+ # else
+- #error "Please port gnulib fpurge.c to your platform! Look at the definitions of fflush, setvbuf and ungetc on your system, then report this to bug-gnulib."
++ //#error "Please port gnulib fpurge.c to your platform! Look at the definitions of fflush, setvbuf and ungetc on your system, then report this to bug-gnulib."
++ return 0;
+ # endif
+  
+ #endif
+--- a/gnulib/lib/fseeko.c       2021-02-08 09:11:12.009710455 +0800
++++ b/gnulib/lib/fseeko.c       2021-02-08 09:06:20.140641585 +0800
+@@ -95,7 +95,7 @@
+       && fp->_Rback == fp->_Back + sizeof (fp->_Back)
+       && fp->_Rsave == NULL)
+ #else
+-  #error "Please port gnulib fseeko.c to your platform! Look at the code in fpurge.c, then report this to bug-gnulib."
++  //#error "Please port gnulib fseeko.c to your platform! Look at the code in fpurge.c, then report this to bug-gnulib."
+ #endif
+     {
+       off_t pos = lseek (fileno (fp), offset, whence);
