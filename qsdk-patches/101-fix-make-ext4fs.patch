@@ -1,0 +1,4 @@
+--- a/contents.c
++++ b/contents.c
+@@ -18,0 +18,1 @@
++#include <sys/sysmacros.h>
