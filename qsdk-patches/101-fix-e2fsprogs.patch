@@ -1,0 +1,4 @@
+--- a/lib/blkid/devname.c
++++ b/lib/blkid/devname.c
+@@ -40,0 +40,1 @@
++#include <sys/sysmacros.h>
