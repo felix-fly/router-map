@@ -1,0 +1,11 @@
+--- a/lib/stdio-impl.h
++++ b/lib/stdio-impl.h
+@@ -21,0 +21,3 @@
++#if !defined _IO_IN_BACKUP && defined _IO_EOF_SEEN
++# define _IO_IN_BACKUP 0x100
++#endif
+--- a/lib/fseterr.c
++++ b/lib/fseterr.c
+@@ -32,1 +32,1 @@
+-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */
++#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */
