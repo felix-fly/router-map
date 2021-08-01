@@ -1,0 +1,4 @@
+--- a/include/common.h
++++ b/include/common.h
+@@ -22,0 +22,1 @@
++#include <sys/sysmacros.h>
