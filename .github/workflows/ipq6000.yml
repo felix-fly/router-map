@@ -10,7 +10,7 @@ jobs:
       - name: init
         run: |
           sudo apt-get update
-          sudo apt-get install -y zsh git git-doc subversion build-essential flex wget gawk unzip man file python2.7 zlib1g-dev libssl-dev libncurses5-dev ocaml-nox
+          sudo apt-get install -y git git-doc subversion build-essential flex wget gawk unzip man file python2.7 zlib1g-dev libssl-dev libncurses5-dev ocaml-nox
           sudo ln -s /usr/bin/python2.7 /usr/bin/python
       - name: build
         run: |
@@ -26,7 +26,8 @@ jobs:
           make -j$(nproc) || make -j1 V=s
           cd ..
           mkdir bin
-          mv qsdk/bin/targets bin
+          mv qsdk/bin/ipq/* bin
+          rm -rf bin/debug
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
