@@ -19,6 +19,10 @@ jobs:
           sed -i 's/$RUN "make -j4"/#$RUN "make -j4"/g' quick_start.sh
           ./quick_start.sh 8dev_mango_open -c
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.config -O .config
+          # Keep version same to the current firmware
+          wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
+          sed -i 's/$(SH_FUNC).*vermagic$/cp $(TOPDIR)\/vermagic $(LINUX_DIR)\/\.vermagic/g' include/kernel-defaults.mk
+          sed -i 's/$(firstword.*md5sum))/$(shell cat $(LINUX_DIR)\/\.vermagic)/g' package/kernel/linux/Makefile
           make defconfig
           make -j$(nproc) || make -j1 V=s
           cd ..
