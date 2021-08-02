@@ -23,7 +23,8 @@ jobs:
           make -j$(nproc) || make -j1 V=s
           cd ..
           mkdir bin
-          mv qsdk/bin/ipq/* bin
+          # mv qsdk/bin/ipq/* bin
+          find qsdk/bin/ipq -name \*.ipk -exec cp {} bin \;
           rm -rf bin/debug
       - name: Upload artifact
         uses: actions/upload-artifact@master
