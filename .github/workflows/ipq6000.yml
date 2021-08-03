@@ -19,10 +19,12 @@ jobs:
           opam switch create 4.02.3
           eval `opam env`
           opam install -y ocamlfind camlp4
+
           git clone --depth 1 https://github.com/felix-fly/qsdk-11.git qsdk
           cd qsdk
-          wget -P tools/automake/patches https://raw.githubusercontent.com/felix-fly/router-map/main/qsdk-patches/210_automake_perl_5.26.1_ver.patch
-          wget -P tools/mkimage/patches https://raw.githubusercontent.com/felix-fly/router-map/main/qsdk-patches/210-openssl-1.1.x-compat.patch
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.config -O .config
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
 
