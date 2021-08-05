@@ -1,7 +1,7 @@
 on:
   push:
     branches: 
-      - ipq6000
+      - 8devices
 
 jobs:
   build:
@@ -9,23 +9,16 @@ jobs:
     steps:
       - name: init
         run: |
-          sudo add-apt-repository -y ppa:avsm/ppa
-          sudo apt update
-          sudo apt-get install -y opam ocaml-nox git zip subversion build-essential flex wget gawk unzip man file zlib1g-dev libssl-dev libncurses5-dev
+          sudo apt-get update
+          sudo apt-get install -y git subversion build-essential flex wget gawk unzip man file python2.7 zlib1g-dev libssl-dev libncurses5-dev ocaml-nox
       - name: build
         run: |
-          opam init
-          eval `opam env`
-          opam switch create 4.02.3
-          eval `opam env`
-          opam install -y ocamlfind camlp4
-
-          git clone --depth 1 https://github.com/felix-fly/qsdk-6.git qsdk
+          git clone --depth 1 https://github.com/felix-fly/qsdk-8devices.git qsdk
           cd qsdk
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-          wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.config -O .config
+          wget https://raw.githubusercontent.com/felix-fly/router-map/main/8devices.config -O .config
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
 
           # Keep version same to the current firmware
@@ -33,7 +26,7 @@ jobs:
           sed -i 's/$(firstword.*md5sum))/$(shell cat $(LINUX_DIR)\/\.vermagic)/g' package/kernel/linux/Makefile
 
           make defconfig
-          make -j1 V=s
+          make -j$(nproc) || make -j1 V=s
           cd ..
           mkdir bin
           # mv qsdk/bin/ipq/* bin
