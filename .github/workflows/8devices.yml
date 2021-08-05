@@ -19,6 +19,7 @@ jobs:
           ./scripts/feeds install -a
 
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/8devices.config -O .config
+          wget https://raw.githubusercontent.com/felix-fly/router-map/main/8devices-kernel.config -O target/linux/ipq/config-4.4
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
 
           # Keep version same to the current firmware
