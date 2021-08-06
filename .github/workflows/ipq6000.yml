@@ -20,7 +20,7 @@ jobs:
           eval `opam env`
           opam install -y ocamlfind camlp4
 
-          git clone --depth 1 https://github.com/felix-fly/qsdk-6.git qsdk
+          git clone --depth 1 https://github.com/felix-fly/qsdk-11.git qsdk
           cd qsdk
           ./scripts/feeds update -a
           ./scripts/feeds install -a
@@ -38,7 +38,6 @@ jobs:
           mkdir bin
           # mv qsdk/bin/ipq/* bin
           find qsdk/bin/ipq -name \*.ipk -exec cp {} bin \;
-          rm -rf bin/debug
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
