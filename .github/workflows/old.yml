@@ -1,7 +1,7 @@
 on:
   push:
     branches: 
-      - 8devices
+      - ipq6000
 
 jobs:
   build:
@@ -13,12 +13,12 @@ jobs:
           sudo apt-get install -y git subversion build-essential flex wget gawk unzip man file python2.7 zlib1g-dev libssl-dev libncurses5-dev ocaml-nox
       - name: build
         run: |
-          git clone --depth 1 https://github.com/felix-fly/qsdk-8devices.git qsdk
+          git clone --depth 1 --branch qsdk-11.3-ipq60xx-4.4 https://github.com/8devices/openwrt-8devices.git qsdk
           cd qsdk
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a -f
-
-          wget https://raw.githubusercontent.com/felix-fly/router-map/main/8devices.config -O .config
+          wget -P tools/mkimage/patches https://raw.githubusercontent.com/felix-fly/router-map/main/qsdk-patches/210-openssl-1.1.x-compat.patch
+          sed -i 's/$RUN "make -j4"/#$RUN "make -j4"/g' quick_start.sh
+          ./quick_start.sh 8dev_mango_open -c
+          wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.config -O .config
 
           # Keep version same to the current firmware
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
