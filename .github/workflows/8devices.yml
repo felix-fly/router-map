@@ -16,7 +16,7 @@ jobs:
           git clone --depth 1 https://github.com/felix-fly/qsdk-8devices.git qsdk
           cd qsdk
           ./scripts/feeds update -a
-          ./scripts/feeds install -a
+          ./scripts/feeds install -a -f
 
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/8devices.config -O .config
           wget https://raw.githubusercontent.com/felix-fly/router-map/main/ipq6000.vermagic -O vermagic
@@ -29,8 +29,10 @@ jobs:
           make -j$(nproc) || make -j1 V=s
           cd ..
           mkdir bin
-          # mv qsdk/bin/ipq/* bin
-          find qsdk/bin/ipq -name \*.ipk -exec cp {} bin \;
+          mkdir bin/packages
+          mv qsdk/bin/ipq/*.bin bin
+          mv qsdk/bin/ipq/*.tar.bz2 bin
+          find qsdk/bin/ipq -name \*.ipk -exec cp {} bin/packages \;
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
