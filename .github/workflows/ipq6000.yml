@@ -14,10 +14,10 @@ jobs:
           sudo apt-get install -y opam ocaml-nox git zip subversion build-essential flex wget gawk unzip man file zlib1g-dev libssl-dev libncurses5-dev
       - name: build
         run: |
-          opam init
-          eval `opam env`
-          opam switch create 4.02.3
-          eval `opam env`
+          opam init -y
+          eval `opam config env`
+          opam switch install 4.02.3
+          eval `opam config env`
           opam install -y ocamlfind camlp4
 
           git clone --depth 1 https://github.com/felix-fly/qsdk-11.git qsdk
@@ -33,10 +33,11 @@ jobs:
           # sed -i 's/$(firstword.*md5sum))/$(shell cat $(LINUX_DIR)\/\.vermagic)/g' package/kernel/linux/Makefile
 
           make defconfig
-          make -j1 V=s
+          make -j$(nproc) || make
           cd ..
           mkdir bin
           mkdir bin/packages
+          mv qsdk/bin/ipq/*.img bin
           mv qsdk/bin/ipq/*.bin bin
           mv qsdk/bin/ipq/*.tar.bz2 bin
           find qsdk/bin/ipq -name \*.ipk -exec cp {} bin/packages \;
