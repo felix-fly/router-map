@@ -14,10 +14,10 @@ jobs:
           sudo apt-get install -y opam ocaml-nox git zip subversion build-essential flex wget gawk unzip man file zlib1g-dev libssl-dev libncurses5-dev
       - name: build
         run: |
-          opam init -y --shell-setup
-          eval `opam config env`
-          opam switch install 4.02.3
-          eval `opam config env`
+          opam init
+          eval `opam env`
+          opam switch create 4.02.3
+          eval `opam env`
           opam install -y ocamlfind camlp4
           
           git clone --depth 1 https://github.com/felix-fly/qsdk-11.git qsdk
