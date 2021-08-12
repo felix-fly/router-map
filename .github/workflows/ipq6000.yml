@@ -14,7 +14,7 @@ jobs:
           sudo apt-get install -y opam ocaml-nox git zip subversion build-essential flex wget gawk unzip man file zlib1g-dev libssl-dev libncurses5-dev
       - name: build
         run: |
-          opam init -y
+          opam init -y --shell-setup
           eval `opam config env`
           opam switch install 4.02.3
           eval `opam config env`
