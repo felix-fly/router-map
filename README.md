@@ -11,6 +11,8 @@
 
 某些路由器CPU可超频（如K2P），超频后性能会有所提升。
 
+* IPQ8071A为超频1.8后的数据
+
 ```bash
 openssl speed -evp aes-128-gcm
 ```
@@ -25,7 +27,7 @@ openssl speed -multi $(cat /proc/cpuinfo |grep processor | wc -l) -evp aes-128-g
 | 红米AX6000   | MT7986A  | 2.0 x 4  | A53 12nm    | Y   | 854124   | 3368572  |   |
 | 华硕AX88U    | BCM4908  | 1.8 x 4  | A53 28nm    | Y   | 695583   | 2684741  | 16560 |
 | 华硕AX92U    | BCM4906  | 1.8 x 2  | A53 28nm    | Y   | 696541   | 1358529  | 8280  |
-| 小米AX3600   | IPQ8071A | 1.4 x 4  | A53 14nm    | Y   |    |   |  |
+| 小米AX3600   | IPQ8071A | 1.4 x 4  | A53 14nm    | Y   | 636086   |   |  |
 | 网件R7800    | IPQ8065  | 1.7 x 2  | Krait 300   |     |    |   |  |
 | 网件R7500V2  | IPQ8064  | 1.4 x 2  | Krait 300   |     |    |   |  |
 | 红米AX6S     | MT7622B  | 1.35 x 2 | A53 14nm    | Y   | 578539   |   |  |
