@@ -33,7 +33,7 @@ openssl speed -multi $(cat /proc/cpuinfo |grep processor | wc -l) -evp aes-128-g
 | 红米AX6S     | MT7622B  | 1.35 x 2 | A53 14nm    | Y   | 578539   |   |  |
 | 小米AX1800   | IPQ6000  | 1.2 x 4  | A53 14nm    | Y   | 322654   | 1268751  | 11040 |
 | 华为AX3 Pro  | Hi5651T  | 1.4 x 4  | A53 28nm    |     |    |   | 12880 |
-| 华为AX3      | Hi5651L  | 1.2 x 4  | A53 28nm    |     |    |   | 5520 |
+| 华为AX3      | Hi5651L  | 1.2 x 2  | A53 28nm    |     |    |   | 5520 |
 | 网件R9000    | AL314P   | 1.7 x 4  | A15 28nm    |     |    |   |  |
 | 华硕AX56U    | BCM6755  | 1.5 x 4  | A7 28nm     | N   | 38805    | 111395   | 11400 |
 | 华硕AX3000   | BCM6750  | 1.5 x 3  | A7 28nm     | N   | 37865    | 72714    | 8550  |
