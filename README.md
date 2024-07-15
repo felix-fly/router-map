@@ -27,6 +27,7 @@ openssl speed -multi $(cat /proc/cpuinfo |grep processor | wc -l) -evp aes-128-g
 | 红米AX6000   | MT7986A  | 2.0 x 4  | A53 12nm    | Y   | 854124   | 3368572  |   |
 | GL.INET MT6000| MT7986A  | 2.0 x 4  | A53 12nm    | Y   | 852746   | 3362810  |   |
 | GL.INET MT2500| MT7981B  | 1.3 x 2  | A53     | Y   | 547072   | 1091802  |   |
+| GL.INET B3000| IPQ5018  | 1.0 x 2  | A53 14nm    | Y   | 429236   | 716690  |   |
 | 华硕AX88U    | BCM4908  | 1.8 x 4  | A53 28nm    | Y   | 695583   | 2684741  | 16560 |
 | 华硕AX92U    | BCM4906  | 1.8 x 2  | A53 28nm    | Y   | 696541   | 1358529  | 8280  |
 | 小米AX3600   | IPQ8071A | 1.4 x 4  | A53 14nm    | Y   | 636086   |   |  |
